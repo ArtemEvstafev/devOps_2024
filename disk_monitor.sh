@@ -1,8 +1,9 @@
 #!/bin/bash
 
-PID_FILE="disk_monitor.pid"
-LOG_DIR="./disk_monitor"
-INTERVAL_IN_SEC=$((60 * 1))
+SCRIPT_DIR=$(dirname "$(realpath "$0")")
+PID_FILE="$SCRIPT_DIR/disk_monitor.pid"
+LOG_DIR="$SCRIPT_DIR/disk_monitor"
+INTERVAL_IN_SEC=$((60 * 10))
 
 create_csv_file() {
     TIMESTAMP=$(date +"%Y-%m-%d_%H:%M:%S")
