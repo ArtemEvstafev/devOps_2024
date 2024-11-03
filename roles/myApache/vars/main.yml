@@ -1,0 +1,7 @@
+---
+# vars file for myApache
+
+apache_packages:
+        - apache2
+        - libapache2-mod-php
+        - git

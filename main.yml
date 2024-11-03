@@ -1,0 +1,15 @@
+- name: Apache
+  hosts: web
+  roles:
+    - role: myApache
+      vars:
+        config: awesome-app
+        appDir: awesome-app
+        
+- name: Java
+  hosts: java
+  roles: 
+    - role: geerlingguy.java    
+    - role: javaHelloWorld
+
+
