@@ -18,7 +18,7 @@ pipeline {
                 sh '''
                 echo "doing checkout.."
                 '''
-                git branch: 'main', url: 'https://github.com/your-repo.git'
+                git branch: 'hmw4', url: 'https://github.com/ArtemEvstafev/devOps_2024.git'
             }
         }
 
