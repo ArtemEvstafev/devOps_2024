@@ -15,8 +15,8 @@ pipeline {
     stages {
         stage('Test Docker') {
             steps {
-            	sh 'docker-compose version'
                 sh 'docker version | grep Version'
+            	sh 'docker-compose version'
                 sh 'docker ps'
             }
         }
