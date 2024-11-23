@@ -9,7 +9,7 @@ pipeline {
         APP_IMAGE = "amicus37/greeting:latest"
         SONAR_SERVER = "http://sonar-server:9000"
         SONAR_PROJECT = "myapp-project"
-        DOCKER_COMPOSE_FILE = 'docker-compose.yml'
+        DOCKER_COMPOSE_FILE = 'docker-compose.yml' 
     }
 
     stages {
