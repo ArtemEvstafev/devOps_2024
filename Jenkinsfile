@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        APP_IMAGE = "myapp:latest"
+        APP_IMAGE = "amicus37/greeting:latest"
         SONAR_SERVER = "http://sonar-server:9000"
         SONAR_PROJECT = "myapp-project"
     }
@@ -30,7 +30,7 @@ pipeline {
                 '''
                 script {
                     // Собираем Docker-контейнер
-                    sh 'docker-compose build'
+                    sh 'docker compose up -d'
                 }
             }
         }
