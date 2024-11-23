@@ -7,8 +7,11 @@ services:
       - 8080:8080
       - 50000:50000
     container_name: jenkins
+    user: root
     volumes:
     - ./jenkins_data:/var/jenkins_home
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /usr/bin/docker:/usr/bin/docker
   sonarqube:
     image: sonarqube:community
     depends_on:
@@ -36,12 +39,4 @@ services:
     volumes:
       - ./postgresql:/var/lib/postgresql
       - ./postgresql_data:/var/lib/postgresql/data
-    
-#db:
-#    image: postgres:12
-#    environment:
-#      POSTGRES_USER: sonar
-#      POSTGRES_PASSWORD: sonar
-#    volumes:
-#      - ./postgresql:/var/lib/postgresql
-#      - ./postgresql_data:/var/lib/postgresql/data
+
