@@ -9,6 +9,7 @@ pipeline {
         APP_IMAGE = "amicus37/greeting:latest"
         SONAR_SERVER = "http://sonar-server:9000"
         SONAR_PROJECT = "myapp-project"
+        DOCKER_COMPOSE_FILE = 'docker-compose.yml'
     }
 
     stages {
@@ -30,7 +31,7 @@ pipeline {
                 '''
                 script {
                     // Собираем Docker-контейнер
-                    sh 'docker compose up -d'
+                    sh 'docker-compose build'
                 }
             }
         }
@@ -104,7 +105,6 @@ pipeline {
                 echo "deploying app.."
                 '''
                 script {
-                    // Развёртывание Docker-контейнеров
                     sh 'docker-compose down && docker-compose up -d'
                 }
             }
@@ -113,11 +113,11 @@ pipeline {
 
     post {
         always {
-            // Сохраняем тестовые отчёты в Jenkins
             junit '**/test-reports/*.xml'
+            echo 'Cleaning up resources...'
+            sh 'docker-compose down --rmi all -v'
         }
         failure {
-            // Уведомление при провале
             echo 'Pipeline failed!'
         }
         success {
