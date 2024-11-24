@@ -31,6 +31,7 @@ pipeline {
                 '''
                 script {
                     sh 'docker ps'
+                    sh 'docker compose ps'
                 }
             }
         }
