@@ -38,7 +38,7 @@ pipeline {
                 echo "doing build stuff.."
                 '''
                 script {
-                    sh './buildWithDocker.sh'
+                    sh 'bash buildWithDocker.sh'
                 }
             }
         }
