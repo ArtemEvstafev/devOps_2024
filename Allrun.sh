@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo docker-compose up -d
+sudo docker compose up -d
 
 URL="http://localhost:5000"
 
