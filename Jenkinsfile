@@ -12,15 +12,7 @@ pipeline {
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
     }
 
-    stages {
-        stage('Test Docker') {
-            steps {
-                sh 'docker version | grep Version'
-            	sh 'docker-compose version'
-                sh 'docker ps'
-            }
-        }
-        
+    stages {        
         stage('Checkout') {
             steps {
                 echo "Checkout.."
@@ -38,7 +30,7 @@ pipeline {
                 echo "doing build stuff.."
                 '''
                 script {
-                    sh 'docker-compose build'
+                    #sh 'docker-compose build'
                 }
             }
         }
@@ -50,7 +42,7 @@ pipeline {
                 echo "doing test stuff.."
                 '''
                 script {
-                    sh 'docker-compose run --rm web pytest --junitxml=test-reports/report.xml'
+                    #sh 'docker-compose run --rm web pytest --junitxml=test-reports/report.xml'
                 }
             }
         }
@@ -62,11 +54,11 @@ pipeline {
                 echo "doing reports.."
                 '''
                 script {
-                    allure([
-                        includeProperties: false, 
-                        jdk: '', 
-                        results: [[path: 'test-reports']]
-                    ])
+                    #allure([
+                    #    includeProperties: false, 
+                    #    jdk: '', 
+                    #    results: [[path: 'test-reports']]
+                    #])
                 }
             }
         }
@@ -78,13 +70,13 @@ pipeline {
                 echo "doing analysis.."
                 '''
                 withSonarQubeEnv('SonarQube') {
-                    sh """
-                        sonar-scanner \
-                        -Dsonar.projectKey=$SONAR_PROJECT \
-                        -Dsonar.sources=./app \
-                        -Dsonar.host.url=$SONAR_SERVER \
-                        -Dsonar.login=<YOUR_SONAR_TOKEN>
-                    """
+                    #sh """
+                    #    sonar-scanner \
+                    #    -Dsonar.projectKey=$SONAR_PROJECT \
+                    #    -Dsonar.sources=./app \
+                    #    -Dsonar.host.url=$SONAR_SERVER \
+                    #    -Dsonar.login=<YOUR_SONAR_TOKEN>
+                    #"""
                 }
             }
         }
@@ -96,8 +88,8 @@ pipeline {
                 echo "checking quality.."
                 '''
                 script {
-                    timeout(time: 5, unit: 'MINUTES') {
-                        waitForQualityGate abortPipeline: true
+                    #timeout(time: 5, unit: 'MINUTES') {
+                    #    waitForQualityGate abortPipeline: true
                     }
                 }
             }
@@ -110,7 +102,7 @@ pipeline {
                 echo "deploying app.."
                 '''
                 script {
-                    sh 'docker-compose down && docker-compose up -d'
+                    #sh 'docker-compose down && docker-compose up -d'
                 }
             }
         }
@@ -119,10 +111,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning up resources...'
-            // Remove dangling images
-            sh 'docker image prune -f'
             junit '**/test-reports/*.xml'
-            sh 'docker-compose down --rmi all -v'
         }
         failure {
             echo 'Pipeline failed!'

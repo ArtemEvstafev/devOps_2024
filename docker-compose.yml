@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 services:
   web:
     image: amicus37/greeting:latest
@@ -19,7 +19,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-
+      
 volumes:
   db_data:
 
