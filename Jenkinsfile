@@ -12,7 +12,15 @@ pipeline {
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
     }
 
-    stages {        
+    stages { 
+        stage('Test Docker') {
+            steps {
+                echo "Docker.."
+                script {
+                    sh 'docker version'
+                }
+            }
+        }
         stage('Checkout') {
             steps {
                 echo "Checkout.."
@@ -30,8 +38,7 @@ pipeline {
                 echo "doing build stuff.."
                 '''
                 script {
-                    sh 'docker ps'
-                    sh 'docker compose ps'
+                    sh './buildWithDocker.sh'
                 }
             }
         }
