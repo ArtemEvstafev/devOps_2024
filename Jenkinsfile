@@ -50,8 +50,8 @@ pipeline {
                 echo "doing test stuff.."
                 '''
                 script {
-                    sh 'curl http://web:5000'
-                    sh 'docker-compose run --rm web pytest --junitxml=test-reports/report.xml'
+                    sh 'curl http://web:5000'pytest tests/
+                    sh 'docker run --rm web pytest tests/ --junitxml=test-reports/report.xml'
                 }
             }
         }
