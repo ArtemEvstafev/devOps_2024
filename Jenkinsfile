@@ -38,7 +38,6 @@ pipeline {
                 echo "doing build stuff.."
                 '''
                 script {
-                    // Собираем Docker-контейнер
                     sh 'docker-compose build'
                 }
             }
@@ -51,7 +50,6 @@ pipeline {
                 echo "doing test stuff.."
                 '''
                 script {
-                    // Запускаем тесты в контейнере web
                     sh 'docker-compose run --rm web pytest --junitxml=test-reports/report.xml'
                 }
             }
@@ -64,7 +62,6 @@ pipeline {
                 echo "doing reports.."
                 '''
                 script {
-                    // Собираем отчёты в Allure
                     allure([
                         includeProperties: false, 
                         jdk: '', 
@@ -80,7 +77,7 @@ pipeline {
                 sh '''
                 echo "doing analysis.."
                 '''
-                withSonarQubeEnv('SonarQube') { // Указываем SonarQube сервер
+                withSonarQubeEnv('SonarQube') {
                     sh """
                         sonar-scanner \
                         -Dsonar.projectKey=$SONAR_PROJECT \
@@ -121,8 +118,10 @@ pipeline {
 
     post {
         always {
-            junit '**/test-reports/*.xml'
             echo 'Cleaning up resources...'
+            // Remove dangling images
+            sh 'docker image prune -f'
+            junit '**/test-reports/*.xml'
             sh 'docker-compose down --rmi all -v'
         }
         failure {
