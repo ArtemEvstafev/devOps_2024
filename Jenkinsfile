@@ -124,7 +124,7 @@ pipeline {
             }
             echo 'Cleaning up resources...'
             junit '**/test-reports/*.xml'
-            
+        }
         failure {
             echo 'Pipeline failed!'
         }
