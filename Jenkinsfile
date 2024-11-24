@@ -49,6 +49,7 @@ pipeline {
                 sh '''
                 echo "doing test stuff.."
                 '''
+                curl localhost:5000
                 script {
                     sh 'docker-compose run --rm web pytest --junitxml=test-reports/report.xml'
                 }
@@ -118,9 +119,12 @@ pipeline {
 
     post {
         always {
+            script {
+            	sh 'docker stop web db && docker rm web db'
+            }
             echo 'Cleaning up resources...'
             junit '**/test-reports/*.xml'
-        }
+            
         failure {
             echo 'Pipeline failed!'
         }
