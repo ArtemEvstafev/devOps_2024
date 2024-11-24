@@ -49,8 +49,8 @@ pipeline {
                 sh '''
                 echo "doing test stuff.."
                 '''
-                curl localhost:5000
                 script {
+                    sh 'curl localhost:5000'
                     sh 'docker-compose run --rm web pytest --junitxml=test-reports/report.xml'
                 }
             }
