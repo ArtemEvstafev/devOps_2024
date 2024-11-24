@@ -42,7 +42,7 @@ pipeline {
                 echo "doing test stuff.."
                 '''
                 script {
-                    #sh 'docker-compose run --rm web pytest --junitxml=test-reports/report.xml'
+                    sh 'docker-compose run --rm web pytest --junitxml=test-reports/report.xml'
                 }
             }
         }
@@ -54,11 +54,11 @@ pipeline {
                 echo "doing reports.."
                 '''
                 script {
-                    #allure([
-                    #    includeProperties: false, 
-                    #    jdk: '', 
-                    #    results: [[path: 'test-reports']]
-                    #])
+                    allure([
+                        includeProperties: false, 
+                        jdk: '', 
+                        results: [[path: 'test-reports']]
+                    ])
                 }
             }
         }
@@ -70,13 +70,13 @@ pipeline {
                 echo "doing analysis.."
                 '''
                 withSonarQubeEnv('SonarQube') {
-                    #sh """
-                    #    sonar-scanner \
-                    #    -Dsonar.projectKey=$SONAR_PROJECT \
-                    #    -Dsonar.sources=./app \
-                    #    -Dsonar.host.url=$SONAR_SERVER \
-                    #    -Dsonar.login=<YOUR_SONAR_TOKEN>
-                    #"""
+                    sh """
+                        sonar-scanner \
+                        -Dsonar.projectKey=$SONAR_PROJECT \
+                        -Dsonar.sources=./app \
+                        -Dsonar.host.url=$SONAR_SERVER \
+                        -Dsonar.login=<YOUR_SONAR_TOKEN>
+                    """
                 }
             }
         }
@@ -88,8 +88,8 @@ pipeline {
                 echo "checking quality.."
                 '''
                 script {
-                    #timeout(time: 5, unit: 'MINUTES') {
-                    #    waitForQualityGate abortPipeline: true
+                    timeout(time: 5, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: true
                     }
                 }
             }
@@ -102,7 +102,7 @@ pipeline {
                 echo "deploying app.."
                 '''
                 script {
-                    #sh 'docker-compose down && docker-compose up -d'
+                    sh 'docker-compose down && docker-compose up -d'
                 }
             }
         }
