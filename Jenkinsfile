@@ -19,7 +19,7 @@ pipeline {
                 sh '''
                 echo "doing checkout.."
                 '''
-                git branch: 'hmw4', url: 'https://github.com/ArtemEvstafev/devOps_2024.git'
+                git branch: 'hmw4', url: 'https://github.com/ArtemEvstafev/devOps_2024.git' 
             }
         }
 
