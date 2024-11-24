@@ -30,7 +30,7 @@ pipeline {
                 echo "doing build stuff.."
                 '''
                 script {
-                    #sh 'docker-compose build'
+                    sh 'docker ps'
                 }
             }
         }
