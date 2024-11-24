@@ -38,8 +38,9 @@ pipeline {
                 echo "doing build stuff.."
                 '''
                 script {
-                    sh 'bash buildWithDocker.sh'
                     sh 'apt install -y python3-pytest'
+                    sh 'bash buildWithDocker.sh'
+                    
                 }
             }
         }
