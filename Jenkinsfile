@@ -39,6 +39,7 @@ pipeline {
                 '''
                 script {
                     sh 'bash buildWithDocker.sh'
+                    sh 'apt install -y python3-pytest'
                 }
             }
         }
@@ -51,7 +52,7 @@ pipeline {
                 '''
                 script {
                     sh 'curl http://web:5000'pytest tests/
-                    sh 'docker run --rm web pytest tests/ --junitxml=test-reports/report.xml'
+                    sh 'docker run --rm web pytest app/tests/ --junitxml=test-reports/report.xml'
                 }
             }
         }
