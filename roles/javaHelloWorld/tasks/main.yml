@@ -8,7 +8,7 @@
       loop:
         - default-jdk
         - git
-      when: inventory_hostname == 'node2'
+      when: "'java' in group_names"
 
     - name: Clone Java repository on node2
       git:

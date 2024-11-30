@@ -1,15 +1,12 @@
-- name: Apache
+- name: Nginx
   hosts: web
+  become: true
   roles:
-    - role: myApache
-      vars:
-        config: awesome-app
-        appDir: awesome-app
+    - myNginx
         
 - name: Java
   hosts: java
   roles: 
-    - role: geerlingguy.java    
     - role: javaHelloWorld
 
 

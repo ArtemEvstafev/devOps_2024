@@ -1,8 +1,0 @@
----
-# defaults file for myApache
-
-config:
-  some-app
-  
-appDir:
-  some-dir

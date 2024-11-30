@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  ansible_node1:
+    build: .
+    container_name: ansible_node1
+    ports:
+      - "2222:22"
+
+  ansible_node2:
+    build: .
+    container_name: ansible_node2
+    ports:
+      - "2223:22"
+
+  ansible_node3:
+    build: .
+    container_name: ansible_node3
+    ports:
+      - "2224:22"
+
