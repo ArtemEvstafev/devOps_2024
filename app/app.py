@@ -21,7 +21,7 @@ def get_word_from_db():
 @app.route('/')
 def hello():
     word = get_word_from_db()
-    return f"Hello world from {word}"
+    return f"Hello world from {word}\n"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

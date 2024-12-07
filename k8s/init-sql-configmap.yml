@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: init-sql
+  namespace: greeting-app
+data:
+  init.sql: |
+    CREATE TABLE greetings (id SERIAL PRIMARY KEY, word VARCHAR(50));
+    INSERT INTO greetings (word) VALUES ('Kubernetes!');
+
