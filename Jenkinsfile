@@ -106,11 +106,11 @@ pipeline {
             }
         }
 
-        stage('Deploy Application') { 
+        stage('Clear Application') { 
             steps {
-                echo "Deploying.."
+                echo "Clearing.."
                 sh '''
-                echo "deploying app.."
+                echo "Clearing app.."
                 '''
                 script {
                     sh 'docker-compose down && docker-compose up -d'
