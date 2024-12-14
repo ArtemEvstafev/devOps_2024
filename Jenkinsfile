@@ -17,7 +17,7 @@ pipeline {
             steps {
                 echo "Docker.."
                 script {
-                    sh 'docker version'
+                    sh 'sudo docker version'
                 }
             }
         }
