@@ -17,6 +17,7 @@ pipeline {
             steps {
                 echo "Docker.."
                 script {
+                    sh 'apt-get install sudo -y'
                     sh 'sudo docker version'
                 }
             }
